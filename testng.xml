@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Flight Booking Test Suite">
+    <test name="Flight Booking Tests">
+        <classes>
+            <class name="com.subham.runners.TestRunner"/>
+        </classes>
+    </test>
+</suite>
+

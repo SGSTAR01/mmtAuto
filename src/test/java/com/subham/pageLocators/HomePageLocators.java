@@ -12,6 +12,8 @@ public class HomePageLocators {
     public static WebElement closeLoginPopup;
     @FindBy(xpath = "//img[@alt='minimize']")
     public static WebElement minimizeChatPopup;
+    @FindBy(xpath = "//span[@class='coachmark']")
+    public static WebElement coachmarkPopup;
 
     //menu locators
     @FindBy(xpath = "//li[@data-cy='menu_Flights']")
@@ -50,18 +52,16 @@ public class HomePageLocators {
     //travel class locators
     @FindBy(xpath = "//button[@data-cy='travellerApplyBtn']")
     public static WebElement applyPassengersButton;
-    @FindBy(xpath = "//li[@data-cy='travelClass_0']")
+    @FindBy(xpath = "//li[@data-cy='travelClass-0']")
     public static WebElement economyClassOption;
-    @FindBy(xpath = "//li[@data-cy='travelClass_1']")
+    @FindBy(xpath = "//li[@data-cy='travelClass-1']")
     public static WebElement premiumEconomyClassOption;
-    @FindBy(xpath = "//li[@data-cy='travelClass_2']")
+    @FindBy(xpath = "//li[@data-cy='travelClass-2']")
     public static WebElement businessClassOption;
-    @FindBy(xpath = "//li[@data-cy='travelClass_3']")
+    @FindBy(xpath = "//li[@data-cy='travelClass-3']")
     public static WebElement firstClassOption;
 
     //search button locator
-    @FindBy(linkText = "Search")
+    @FindBy(xpath = "//p[@data-cy='submit']/a")
     public static WebElement searchFlightsButton;
-
-    
 }

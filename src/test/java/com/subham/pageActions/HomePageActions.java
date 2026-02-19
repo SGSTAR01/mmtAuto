@@ -2,6 +2,7 @@ package com.subham.pageActions;
 
 import com.subham.pageLocators.HomePageLocators;
 import com.subham.utils.DriverUtil;
+import com.subham.utils.ScrollUtil;
 import com.subham.utils.WaitUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +28,13 @@ public class HomePageActions {
         WaitUtils.waitForClickableElement(HomePageLocators.closeLoginPopup);
         HomePageLocators.closeLoginPopup.click();
         logger.info("Login popup closed");
+            try {
+                WaitUtils.waitForClickableElement(HomePageLocators.coachmarkPopup);
+                HomePageLocators.coachmarkPopup.click();
+                logger.info("Coachmark popup closed");
+            } catch (Exception e) {
+                logger.info("No coachmark popup found to close");
+            }
     }
 
     public void onFlightBookingPage() {
@@ -110,6 +118,7 @@ public class HomePageActions {
         }
         String dynamicXpath = String.format("//div[contains(text(),'%s')]/../..//div[contains(@aria-label,'%s')]", monthYear, day);
         WebElement dayElement = DriverUtil.getDriver().findElement(By.xpath(dynamicXpath));
+        ScrollUtil.scrollToElement(dayElement);
         WaitUtils.waitForClickableElement(dayElement);
         dayElement.click();
         logger.info("Successfully selected date: {}", date);
@@ -124,24 +133,28 @@ public class HomePageActions {
     }
 
     public void selectPassengers(String adults, String children, String infants) {
+        ScrollUtil.scrollToElement(HomePageLocators.passengerSection);
         WaitUtils.waitForClickableElement(HomePageLocators.passengerSection);
         HomePageLocators.passengerSection.click();
         logger.info("Clicked on passenger section");
         //Select adults
         String adultsXpath = String.format("//li[@data-cy='adults-%s']", adults);
-        WebElement adultsOption = DriverUtil.getDriver().findElement(By.xpath(adultsXpath));
+        WebElement adultsOption = WaitUtils.wait(By.xpath(adultsXpath));
+        ScrollUtil.scrollToElement(adultsOption);
         WaitUtils.waitForVisibleElement(adultsOption);
         adultsOption.click();
         logger.info("Selected adults: {}", adults);
         //Select children
         String childrenXpath = String.format("//li[@data-cy='children-%s']", children);
         WebElement childrenOption = DriverUtil.getDriver().findElement(By.xpath(childrenXpath));
+        ScrollUtil.scrollToElement(childrenOption);
         WaitUtils.waitForVisibleElement(childrenOption);
         childrenOption.click();
         logger.info("Selected children: {}", children);
         //Select infants
         String infantsXpath = String.format("//li[@data-cy='infants-%s']", infants);
         WebElement infantsOption = DriverUtil.getDriver().findElement(By.xpath(infantsXpath));
+        ScrollUtil.scrollToElement(infantsOption);
         WaitUtils.waitForVisibleElement(infantsOption);
         infantsOption.click();
         logger.info("Selected infants: {}", infants);
@@ -150,35 +163,43 @@ public class HomePageActions {
         public void selectTravelClass(String travelClass) {
             switch (travelClass) {
                 case "Economy":
-                    WaitUtils.waitForClickableElement(HomePageLocators.economyClassOption);
+                    WaitUtils.waitForVisibleElement(HomePageLocators.economyClassOption);
+                    ScrollUtil.scrollToElement(HomePageLocators.economyClassOption);
                     HomePageLocators.economyClassOption.click();
                     logger.info("Selected travel class: Economy");
                     break;
                 case "Premium Economy":
-                    WaitUtils.waitForClickableElement(HomePageLocators.premiumEconomyClassOption);
+                    ScrollUtil.scrollToElement(HomePageLocators.premiumEconomyClassOption);
+                    WaitUtils.waitForVisibleElement(HomePageLocators.premiumEconomyClassOption);
                     HomePageLocators.premiumEconomyClassOption.click();
                     logger.info("Selected travel class: Premium Economy");
                     break;
                 case "Business":
-                    WaitUtils.waitForClickableElement(HomePageLocators.businessClassOption);
+                    ScrollUtil.scrollToElement(HomePageLocators.businessClassOption);
+                    WaitUtils.waitForVisibleElement(HomePageLocators.businessClassOption);
                     HomePageLocators.businessClassOption.click();
                     logger.info("Selected travel class: Business");
                     break;
                 case "First Class":
-                    WaitUtils.waitForClickableElement(HomePageLocators.firstClassOption);
+                    ScrollUtil.scrollToElement(HomePageLocators.firstClassOption);
+                    WaitUtils.waitForVisibleElement(HomePageLocators.firstClassOption);
                     HomePageLocators.firstClassOption.click();
                     logger.info("Selected travel class: First Class");
                     break;
                 default:
                     logger.warn("Invalid travel class provided: {}", travelClass);
             }
-            WaitUtils.waitForClickableElement(HomePageLocators.applyPassengersButton);
+            ScrollUtil.scrollToElement(HomePageLocators.applyPassengersButton);
+            WaitUtils.waitForVisibleElement(HomePageLocators.applyPassengersButton);
+            logger.info("Scrolled to apply passengers button after selecting travel class");
             HomePageLocators.applyPassengersButton.click();
             logger.info("Clicked on apply passengers button after selecting travel class");
         }
 
         public void clickSearchFlights() {
-            WaitUtils.waitForClickableElement(HomePageLocators.searchFlightsButton);
+            WaitUtils.waitForVisibleElement(HomePageLocators.searchFlightsButton);
+            ScrollUtil.scrollToElement(HomePageLocators.searchFlightsButton);
+            logger.info("Scrolled to search flights button");
             HomePageLocators.searchFlightsButton.click();
             logger.info("Clicked on search flights button");
         }

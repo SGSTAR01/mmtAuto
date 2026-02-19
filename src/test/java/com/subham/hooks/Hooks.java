@@ -22,7 +22,7 @@ public class Hooks {
     @After
     public void tearDown() {
         if (driver != null) {
-            DriverUtil.quitDriver();
+//            DriverUtil.quitDriver();
             logger.info("WebDriver closed successfully");
         }
     }

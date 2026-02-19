@@ -20,7 +20,7 @@ Feature: Flight Search on MakeMyTrip
 
     Examples:
       | from      | to        | departureDate | adults | children | infants | travelClass     |
-      | Mumbai    | Delhi     | 25 March 2026 | 1      | 0        | 0       | Economy         |
+      | Mumbai    | Delhi     | 25 May 2026 | 1      | 0        | 0       | Economy         |
 #      | Bangalore | Goa       | 10 April 2026 | 2      | 1        | 1       | Business        |
 #      | Hyderabad | Chennai   | 15 May 2026   | 1      | 2        | 0       | Premium Economy |
 #      | Kolkata   | Pune      | 20 June 2026  | 3      | 0        | 2       | Economy         |

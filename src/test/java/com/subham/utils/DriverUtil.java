@@ -8,6 +8,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collections;
+
 public class DriverUtil {
 
     private static final Logger logger = LogManager.getLogger(DriverUtil.class);
@@ -23,12 +25,16 @@ public class DriverUtil {
                 case "chrome":
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.addArguments("--start-maximized");
-                    chromeOptions.addArguments("--disable-notifications");
-                    chromeOptions.addArguments("--disable-popup-blocking");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-blink-features=AutomationControlled");
+                    chromeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+                    chromeOptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+                    chromeOptions.setExperimentalOption("useAutomationExtension", false);
                     if (Boolean.parseBoolean(ConfigUtil.loadConfig("headless"))) {
                         chromeOptions.addArguments("--headless=new");
                     }
                     webDriver = new ChromeDriver(chromeOptions);
+                    webDriver.manage().deleteAllCookies();
                     break;
                 case "firefox":
                     webDriver = new FirefoxDriver();

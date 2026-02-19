@@ -65,4 +65,16 @@ public class WaitUtils {
     public static void waitForSuggestionsToAppear(String cityName) {
         waitForElementsToBePresent(By.xpath("//ul[contains(@class,'suggestions-list')]/li[contains(.,'" + cityName + "')]"));
     }
+
+    public static WebElement wait(By locator) {
+        try {
+            logger.info("Waiting for element to be present: {}", locator);
+            WebDriverWait wait = new WebDriverWait(DriverUtil.getDriver(), DEFAULT_TIMEOUT);
+            wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+            logger.info("Element is present: {}", locator);
+        } catch (Exception e) {
+            logger.error("Element did not appear within timeout: {}", locator, e);
+        }
+        return DriverUtil.getDriver().findElement(locator);
+    }
 }
